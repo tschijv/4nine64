@@ -1,0 +1,18 @@
+
+# === 4nine64 bv ===
+# Statische site in nginx, container 4nine64-web op netwerk deploy_vzc (/srv/4nine64).
+# BELANGRIJK: deploy.sh van de catalogus kopieert Caddyfile.local over ./Caddyfile bij elke
+# deploy — dit blok moet dus in Caddyfile.local blijven staan. Bijwerken van de site zelf:
+# 4nine64/scripts/deploy.sh vanaf de werkplek; dit blok hoeft dan niet aangeraakt.
+www.4nine64.nl {
+	redir https://4nine64.nl{uri} permanent
+}
+4nine64.nl {
+	encode gzip
+	reverse_proxy 4nine64-web:80
+	header {
+		Strict-Transport-Security "max-age=31536000"
+		X-Content-Type-Options "nosniff"
+		Referrer-Policy "strict-origin-when-cross-origin"
+	}
+}

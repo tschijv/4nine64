@@ -1,0 +1,373 @@
+<title>4nine64 bv</title>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700&family=IBM+Plex+Mono:wght@400;500&family=Public+Sans:ital,wght@0,400;0,600;1,400&display=swap">
+<style>
+  :root{
+    --paper:#ffffff;
+    --desk:#edeef3;
+    --ink:#15151f;
+    --muted:#63637a;
+    --faint:#9a9ab0;
+    --rule:#e2e2ea;
+    --hair:#f0f0f5;
+    --accent:#3f3ee5;
+    --accent-soft:#eeeefe;
+    --shadow:0 1px 2px rgba(21,21,31,.06),0 12px 32px -12px rgba(21,21,31,.18);
+    --logo-light:block;
+    --logo-dark:none;
+  }
+  @media (prefers-color-scheme:dark){
+    :root:not([data-theme="light"]){
+      --paper:#14141c;
+      --desk:#0a0a10;
+      --ink:#e9e9f2;
+      --muted:#9e9eb5;
+      --faint:#6a6a82;
+      --rule:#272734;
+      --hair:#1d1d27;
+      --accent:#8e8dff;
+      --accent-soft:#1e1e38;
+      --shadow:0 0 0 1px rgba(255,255,255,.04);
+      --logo-light:none;
+      --logo-dark:block;
+    }
+  }
+  :root[data-theme="dark"]{
+    --paper:#14141c;
+    --desk:#0a0a10;
+    --ink:#e9e9f2;
+    --muted:#9e9eb5;
+    --faint:#6a6a82;
+    --rule:#272734;
+    --hair:#1d1d27;
+    --accent:#8e8dff;
+    --accent-soft:#1e1e38;
+    --shadow:0 0 0 1px rgba(255,255,255,.04);
+    --logo-light:none;
+    --logo-dark:block;
+  }
+
+  *{box-sizing:border-box}
+  body{
+    background:var(--desk);
+    color:var(--ink);
+    font-family:"Public Sans",ui-sans-serif,system-ui,-apple-system,"Segoe UI",sans-serif;
+    font-size:16px;
+    line-height:1.6;
+    -webkit-font-smoothing:antialiased;
+    padding:clamp(0px,3vw,40px) clamp(0px,3vw,32px) clamp(24px,6vw,72px);
+  }
+
+  /* ── proof slip: sits on the desk, not on the sheet ───────────── */
+  .proof{
+    max-width:940px;margin:0 auto 14px;
+    display:flex;flex-wrap:wrap;gap:6px 14px;align-items:baseline;
+    padding:0 clamp(16px,3vw,24px);
+    font-family:"IBM Plex Mono",ui-monospace,SFMono-Regular,Menlo,monospace;
+    font-size:11px;letter-spacing:.06em;text-transform:uppercase;color:var(--faint);
+  }
+  .proof b{color:var(--accent);font-weight:500}
+
+  /* ── the sheet ────────────────────────────────────────────────── */
+  .sheet{
+    max-width:940px;margin:0 auto;background:var(--paper);
+    border:1px solid var(--rule);box-shadow:var(--shadow);
+    padding:clamp(24px,4.5vw,54px) clamp(18px,4vw,54px) clamp(28px,4vw,44px);
+  }
+
+  /* ── letterhead ───────────────────────────────────────────────── */
+  .head{
+    display:flex;flex-wrap:wrap;gap:20px;align-items:flex-start;
+    justify-content:space-between;
+    padding-bottom:clamp(22px,3vw,32px);
+  }
+  .mark img{width:clamp(126px,17vw,158px);height:auto}
+  .mark .l-light{display:var(--logo-light)}
+  .mark .l-dark{display:var(--logo-dark)}
+
+  .lang{display:flex;border:1px solid var(--rule);background:var(--paper)}
+  .lang button{
+    appearance:none;border:0;background:none;cursor:pointer;
+    font-family:"IBM Plex Mono",ui-monospace,monospace;
+    font-size:11px;letter-spacing:.1em;color:var(--muted);
+    padding:7px 11px;line-height:1;
+  }
+  .lang button+button{border-left:1px solid var(--rule)}
+  .lang button[aria-pressed="true"]{background:var(--accent);color:#fff}
+  :root[data-theme="dark"] .lang button[aria-pressed="true"]{color:#14141c}
+  @media (prefers-color-scheme:dark){
+    :root:not([data-theme="light"]) .lang button[aria-pressed="true"]{color:#14141c}
+  }
+  .lang button:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+
+  /* ── row grid: mono margin rail + content ─────────────────────── */
+  .row{
+    display:grid;grid-template-columns:132px minmax(0,1fr);
+    gap:clamp(16px,3vw,36px);
+    border-top:1px solid var(--rule);
+    padding:clamp(26px,3.6vw,38px) 0;
+  }
+  .row:last-of-type{padding-bottom:clamp(20px,3vw,30px)}
+  .rail{
+    font-family:"IBM Plex Mono",ui-monospace,monospace;
+    font-size:11px;letter-spacing:.09em;text-transform:uppercase;
+    color:var(--faint);padding-top:.45em;
+  }
+  @media (max-width:680px){
+    .row{grid-template-columns:1fr;gap:12px}
+    .rail{padding-top:0}
+  }
+
+  h1{
+    font-family:"Bricolage Grotesque","Public Sans",sans-serif;
+    font-weight:700;font-size:clamp(28px,4.4vw,42px);line-height:1.1;
+    letter-spacing:-.02em;margin:0 0 .5em;text-wrap:balance;
+    font-variation-settings:"opsz" 48;
+  }
+  h2{
+    font-family:"Bricolage Grotesque","Public Sans",sans-serif;
+    font-weight:700;font-size:clamp(17px,2vw,20px);line-height:1.25;
+    letter-spacing:-.01em;margin:0 0 .85em;
+  }
+  p{margin:0 0 1em;max-width:62ch}
+  p:last-child{margin-bottom:0}
+  .lead{font-size:clamp(16px,1.6vw,18px);color:var(--muted)}
+  a{color:var(--accent);text-decoration:none;border-bottom:1px solid currentColor}
+  a:hover{background:var(--accent-soft)}
+  a:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+
+  /* ── what the bv does ─────────────────────────────────────────── */
+  .doings{list-style:none;margin:0;padding:0;display:grid;gap:14px}
+  .doings li{display:grid;gap:2px;padding-top:14px;border-top:1px solid var(--hair)}
+  .doings li:first-child{padding-top:0;border-top:0}
+  .doings b{font-weight:600}
+  .doings span.d{color:var(--muted)}
+
+  /* ── registration table ───────────────────────────────────────── */
+  dl{margin:0;display:grid;grid-template-columns:minmax(140px,210px) minmax(0,1fr);
+     gap:0 clamp(14px,2.5vw,28px)}
+  dt,dd{padding:9px 0;border-top:1px solid var(--hair);margin:0;min-width:0}
+  dt:first-of-type,dt:first-of-type+dd{border-top:0;padding-top:0}
+  dt{
+    font-family:"IBM Plex Mono",ui-monospace,monospace;
+    font-size:12px;color:var(--muted);line-height:1.5;padding-top:12px;
+  }
+  dt:first-of-type{padding-top:0}
+  dd{font-size:15px;overflow-wrap:anywhere}
+  dd.num{font-family:"IBM Plex Mono",ui-monospace,monospace;font-variant-numeric:tabular-nums;font-size:14px}
+  @media (max-width:680px){
+    dl{grid-template-columns:1fr;gap:0}
+    dt{border-top:1px solid var(--hair);padding:12px 0 0}
+    dt:first-of-type{border-top:0}
+    dd{border-top:0;padding:1px 0 0}
+  }
+
+  /* ── placeholder values still to be filled in ─────────────────── */
+  .tbd{
+    font-family:"IBM Plex Mono",ui-monospace,monospace;font-size:13px;
+    color:var(--accent);background:var(--accent-soft);
+    padding:1px 6px;border:1px dashed var(--accent);
+    white-space:nowrap;
+  }
+
+  /* ── documents ────────────────────────────────────────────────── */
+  .docs{list-style:none;margin:0;padding:0;display:grid;gap:0}
+  .docs li{
+    display:flex;flex-wrap:wrap;gap:4px 12px;align-items:baseline;
+    justify-content:space-between;padding:11px 0;border-top:1px solid var(--hair);
+  }
+  .docs li:first-child{border-top:0;padding-top:0}
+  .docs .state{
+    font-family:"IBM Plex Mono",ui-monospace,monospace;
+    font-size:11px;letter-spacing:.06em;text-transform:uppercase;color:var(--faint);
+  }
+
+  footer{
+    border-top:1px solid var(--rule);padding-top:18px;
+    display:flex;flex-wrap:wrap;gap:6px 20px;justify-content:space-between;
+    font-family:"IBM Plex Mono",ui-monospace,monospace;
+    font-size:11.5px;letter-spacing:.04em;color:var(--faint);
+  }
+
+  /* ── language switching ───────────────────────────────────────── */
+  .en{display:none}
+  [data-lang="en"] .nl{display:none}
+  [data-lang="en"] .en{display:inline}
+  [data-lang="en"] .en.blk{display:block}
+
+  @media (prefers-reduced-motion:reduce){*{transition:none!important;animation:none!important}}
+</style>
+
+<div class="proof">
+  <span><b>Concept</b> &nbsp;ontwerpvoorstel 4nine64 bv</span>
+  <span>5 oktober 2026</span>
+  <span>Waarden tussen streepjeslijnen moeten nog worden ingevuld</span>
+</div>
+
+<main class="sheet">
+
+  <header class="head">
+    <div class="mark">
+      <img class="l-light" src="assets/logo.png" alt="4nine64 bv" width="268" height="138">
+      <img class="l-dark" src="assets/logo-dark.png" alt="4nine64 bv" width="268" height="138">
+    </div>
+    <div class="lang" role="group" aria-label="Taal / Language">
+      <button type="button" data-set="nl" aria-pressed="true">NL</button>
+      <button type="button" data-set="en" aria-pressed="false">EN</button>
+    </div>
+  </header>
+
+  <section class="row">
+    <div class="rail"><span class="nl">Over</span><span class="en">About</span></div>
+    <div>
+      <h1>
+        <span class="nl">De besloten vennootschap van Toine Schijvenaars.</span>
+        <span class="en">The private limited company of Toine Schijvenaars.</span>
+      </h1>
+      <p class="lead">
+        <span class="nl">Vanuit 4nine64 bv werk ik als zelfstandig adviseur en ontwikkelaar aan begrippenkaders, informatiemodellen en software voor organisaties in het publieke domein. Deze pagina bevat de gegevens die u nodig heeft om met de vennootschap zaken te doen.</span>
+        <span class="en">Through 4nine64 bv I work as an independent consultant and developer on terminology frameworks, information models and software for organisations in the Dutch public sector. This page holds the details you need in order to do business with the company.</span>
+      </p>
+    </div>
+  </section>
+
+  <section class="row">
+    <div class="rail"><span class="nl">Werkterrein</span><span class="en">Practice</span></div>
+    <div>
+      <h2><span class="nl">Waar de vennootschap aan werkt</span><span class="en">What the company works on</span></h2>
+      <ul class="doings">
+        <li>
+          <b><span class="nl">Begrippenkaders en semantische standaarden</span><span class="en">Terminology frameworks and semantic standards</span></b>
+          <span class="d">
+            <span class="nl">Opzetten, harmoniseren en beheren van begrippenkaders voor overheids&shy;organisaties en koepels.</span>
+            <span class="en">Setting up, harmonising and maintaining terminology frameworks for government bodies and sector associations.</span>
+          </span>
+        </li>
+        <li>
+          <b><span class="nl">Software voor informatiebeheer</span><span class="en">Software for information management</span></b>
+          <span class="d">
+            <span class="nl">Ontwerp en bouw van webapplicaties waarmee organisaties hun eigen begrippen, dossiers en gegevens beheren.</span>
+            <span class="en">Design and build of web applications that let organisations manage their own terms, records and data.</span>
+          </span>
+        </li>
+        <li>
+          <b><span class="nl">Advies en interim</span><span class="en">Consulting and interim work</span></b>
+          <span class="d">
+            <span class="nl">Begeleiding bij informatievoorziening, architectuur en de inrichting van beheerprocessen.</span>
+            <span class="en">Guidance on information provision, architecture and the setup of governance processes.</span>
+          </span>
+        </li>
+      </ul>
+    </div>
+  </section>
+
+  <section class="row">
+    <div class="rail"><span class="nl">Gegevens</span><span class="en">Details</span></div>
+    <div>
+      <h2><span class="nl">Zakelijke gegevens</span><span class="en">Company details</span></h2>
+      <dl>
+        <dt><span class="nl">Statutaire naam</span><span class="en">Statutory name</span></dt>
+        <dd>4nine64 bv</dd>
+
+        <dt><span class="nl">Rechtsvorm</span><span class="en">Legal form</span></dt>
+        <dd>
+          <span class="nl">Besloten vennootschap met beperkte aansprakelijkheid</span>
+          <span class="en">Besloten vennootschap (Dutch private limited company)</span>
+        </dd>
+
+        <dt><span class="nl">Bestuurder</span><span class="en">Director</span></dt>
+        <dd>T. Schijvenaars</dd>
+
+        <dt><span class="nl">KvK-nummer</span><span class="en">Chamber of Commerce no.</span></dt>
+        <dd class="num">30243619</dd>
+
+        <dt><span class="nl">Btw-identificatienummer</span><span class="en">VAT identification no.</span></dt>
+        <dd class="num">NL8196.95.063.B01</dd>
+
+        <dt><span class="nl">Vestigingsadres</span><span class="en">Registered address</span></dt>
+        <dd><span class="tbd">straat, postcode, plaats</span></dd>
+
+        <dt>E-mail</dt>
+        <dd><span class="tbd">naam@4nine64.nl</span></dd>
+
+        <dt>Website</dt>
+        <dd>4nine64.nl</dd>
+      </dl>
+    </div>
+  </section>
+
+  <section class="row">
+    <div class="rail"><span class="nl">Facturatie</span><span class="en">Invoicing</span></div>
+    <div>
+      <h2><span class="nl">Facturen en betaling</span><span class="en">Invoices and payment</span></h2>
+      <p>
+        <span class="nl">Facturen worden digitaal verstuurd en zijn betaalbaar binnen dertig dagen na factuurdatum. Vermeld bij betaling het factuurnummer en, indien van toepassing, uw inkoopordernummer.</span>
+        <span class="en">Invoices are sent digitally and are payable within thirty days of the invoice date. When paying, quote the invoice number and, where applicable, your purchase order number.</span>
+      </p>
+      <dl>
+        <dt>IBAN</dt>
+        <dd class="num">NL34 INGB 0005 3309 16</dd>
+
+        <dt><span class="nl">Ten name van</span><span class="en">Account holder</span></dt>
+        <dd>4nine64 bv</dd>
+
+        <dt><span class="nl">Facturen richten aan</span><span class="en">Send invoices to</span></dt>
+        <dd><span class="tbd">facturen@4nine64.nl</span></dd>
+
+        <dt><span class="nl">Betaaltermijn</span><span class="en">Payment term</span></dt>
+        <dd class="num"><span class="nl">30 dagen</span><span class="en">30 days</span></dd>
+      </dl>
+    </div>
+  </section>
+
+  <section class="row">
+    <div class="rail"><span class="nl">Documenten</span><span class="en">Documents</span></div>
+    <div>
+      <h2><span class="nl">Voorwaarden en verklaringen</span><span class="en">Terms and statements</span></h2>
+      <ul class="docs">
+        <li>
+          <span><span class="nl">Algemene voorwaarden</span><span class="en">General terms and conditions</span></span>
+          <span class="state"><span class="nl">nog op te stellen</span><span class="en">to be drafted</span></span>
+        </li>
+        <li>
+          <span><span class="nl">Privacyverklaring</span><span class="en">Privacy statement</span></span>
+          <span class="state"><span class="nl">nog op te stellen</span><span class="en">to be drafted</span></span>
+        </li>
+        <li>
+          <span><span class="nl">Uittreksel Handelsregister</span><span class="en">Commercial register extract</span></span>
+          <span class="state"><span class="nl">op aanvraag</span><span class="en">on request</span></span>
+        </li>
+      </ul>
+    </div>
+  </section>
+
+  <footer>
+    <span>&copy; 2026 4nine64 bv</span>
+    <span><span class="nl">Laatst bijgewerkt</span><span class="en">Last updated</span> 05-10-2026</span>
+  </footer>
+
+</main>
+
+<script>
+  (function () {
+    var root = document.documentElement;
+    var buttons = Array.prototype.slice.call(document.querySelectorAll('.lang button'));
+
+    function apply(lang) {
+      root.setAttribute('data-lang', lang);
+      root.lang = lang;
+      buttons.forEach(function (b) {
+        b.setAttribute('aria-pressed', String(b.dataset.set === lang));
+      });
+      try { localStorage.setItem('4nine64-lang', lang); } catch (e) {}
+    }
+
+    var stored = null;
+    try { stored = localStorage.getItem('4nine64-lang'); } catch (e) {}
+    apply(stored === 'en' ? 'en' : 'nl');
+
+    buttons.forEach(function (b) {
+      b.addEventListener('click', function () { apply(b.dataset.set); });
+    });
+  })();
+</script>

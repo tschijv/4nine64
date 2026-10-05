@@ -1,0 +1,319 @@
+<title>4nine64 bv</title>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght,SOFT,WONK@9..144,300..700,0..100,0..1&family=Instrument+Sans:wght@400;500;600&family=DM+Mono:wght@400;500&display=swap">
+<style>
+  :root{
+    --paper:#fcfcfe;
+    --tint:#f1f1fd;
+    --ink:#121226;
+    --muted:#5b5b78;
+    --faint:#9393ad;
+    --rule:#e3e3ee;
+    --accent:#3f3ee5;
+    --field:#2f2ecb;          /* indigo as a surface, slightly deepened */
+    --on-field:#f6f5fc;
+    --on-field-soft:#c9c8ff;
+    --on-field-rule:rgba(246,245,252,.22);
+  }
+  @media (prefers-color-scheme:dark){
+    :root:not([data-theme="light"]){
+      --paper:#0d0d17;
+      --tint:#14142a;
+      --ink:#ededf7;
+      --muted:#a3a3be;
+      --faint:#6c6c88;
+      --rule:#242439;
+      --accent:#9d9cff;
+      --field:#2724ad;
+      --on-field:#f6f5fc;
+      --on-field-soft:#c9c8ff;
+      --on-field-rule:rgba(246,245,252,.2);
+    }
+  }
+  :root[data-theme="dark"]{
+    --paper:#0d0d17;
+    --tint:#14142a;
+    --ink:#ededf7;
+    --muted:#a3a3be;
+    --faint:#6c6c88;
+    --rule:#242439;
+    --accent:#9d9cff;
+    --field:#2724ad;
+    --on-field:#f6f5fc;
+    --on-field-soft:#c9c8ff;
+    --on-field-rule:rgba(246,245,252,.2);
+  }
+
+  *{box-sizing:border-box}
+  body{
+    background:var(--paper);color:var(--ink);
+    font-family:"Instrument Sans",ui-sans-serif,system-ui,-apple-system,sans-serif;
+    font-size:17px;line-height:1.6;-webkit-font-smoothing:antialiased;
+  }
+  .wrap{max-width:1160px;margin:0 auto;padding:0 clamp(20px,5vw,56px)}
+
+  .mono{font-family:"DM Mono",ui-monospace,SFMono-Regular,Menlo,monospace}
+  .eyebrow{font-family:"DM Mono",ui-monospace,monospace;font-size:12px;letter-spacing:.14em;text-transform:uppercase}
+  .serif{font-family:"Fraunces","Iowan Old Style",Georgia,serif}
+
+  a{color:inherit;text-decoration:none;border-bottom:1px solid currentColor}
+  a:focus-visible,button:focus-visible{outline:2px solid currentColor;outline-offset:3px}
+
+  /* ── indigo field ───────────────────────────────────────────── */
+  .field{background:var(--field);color:var(--on-field)}
+  .topbar{
+    display:flex;justify-content:space-between;align-items:center;gap:16px;
+    padding:22px 0;border-bottom:1px solid var(--on-field-rule);
+  }
+  .topbar .tag{color:var(--on-field-soft)}
+  .lang{display:flex;gap:2px;border:1px solid var(--on-field-rule);padding:2px;border-radius:999px}
+  .lang button{
+    appearance:none;border:0;cursor:pointer;background:none;color:var(--on-field-soft);
+    font-family:"DM Mono",ui-monospace,monospace;font-size:12px;letter-spacing:.1em;
+    padding:6px 12px;border-radius:999px;line-height:1;
+  }
+  .lang button[aria-pressed="true"]{background:var(--on-field);color:var(--field)}
+
+  .hero{
+    display:grid;grid-template-columns:minmax(0,1.1fr) minmax(0,1fr);
+    gap:clamp(28px,5vw,72px);align-items:end;
+    padding:clamp(48px,8vw,112px) 0 clamp(44px,7vw,96px);
+  }
+  .hero .mark img{width:min(100%,520px);height:auto;display:block}
+  .hero h1{
+    font-family:"Fraunces",Georgia,serif;
+    font-variation-settings:"opsz" 144,"SOFT" 60,"WONK" 1;
+    font-weight:340;font-size:clamp(34px,4.6vw,60px);line-height:1.04;
+    letter-spacing:-.015em;margin:0 0 .6em;text-wrap:balance;
+  }
+  .hero h1 em{font-style:italic;font-weight:400;color:var(--on-field-soft)}
+  .hero p{margin:0;max-width:46ch;color:var(--on-field-soft);font-size:clamp(16px,1.4vw,18px)}
+  .hero .eyebrow{color:var(--on-field-soft);margin-bottom:18px;display:block}
+  @media (max-width:800px){
+    .hero{grid-template-columns:1fr;align-items:start}
+    .hero .mark img{width:min(72vw,360px)}
+  }
+
+  /* ── sections on paper ──────────────────────────────────────── */
+  section.band{padding:clamp(56px,8vw,104px) 0}
+  section.band+section.band{border-top:1px solid var(--rule)}
+  .band-head{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,2fr);gap:clamp(20px,4vw,56px);align-items:start}
+  .band-head .eyebrow{color:var(--accent)}
+  .band h2{
+    font-family:"Fraunces",Georgia,serif;font-variation-settings:"opsz" 72,"SOFT" 40,"WONK" 0;
+    font-weight:400;font-size:clamp(28px,3.4vw,44px);line-height:1.1;letter-spacing:-.012em;
+    margin:.2em 0 0;text-wrap:balance;
+  }
+  @media (max-width:800px){.band-head{grid-template-columns:1fr;gap:10px}}
+
+  /* practice: three columns */
+  .cols{
+    display:grid;grid-template-columns:repeat(3,minmax(0,1fr));
+    gap:clamp(24px,3vw,40px);margin-top:clamp(36px,5vw,64px);
+  }
+  .cols article{display:grid;gap:10px;padding-top:18px;border-top:2px solid var(--ink)}
+  .cols h3{
+    font-family:"Fraunces",Georgia,serif;font-variation-settings:"opsz" 36,"SOFT" 40;
+    font-weight:500;font-size:22px;line-height:1.2;margin:0;letter-spacing:-.005em;
+  }
+  .cols p{margin:0;color:var(--muted);font-size:16px}
+  @media (max-width:800px){.cols{grid-template-columns:1fr;gap:28px}}
+
+  /* the numbers */
+  .figures{
+    margin-top:clamp(36px,5vw,64px);display:grid;
+    grid-template-columns:repeat(2,minmax(0,1fr));gap:0 clamp(28px,4vw,64px);
+  }
+  .figure{padding:22px 0;border-top:1px solid var(--rule);display:grid;gap:6px;min-width:0}
+  .figure .eyebrow{color:var(--muted)}
+  .figure .val{
+    font-family:"Fraunces",Georgia,serif;font-variation-settings:"opsz" 96,"SOFT" 30,"WONK" 0;
+    font-weight:300;font-size:clamp(30px,4.2vw,54px);line-height:1.05;letter-spacing:-.01em;
+    font-variant-numeric:tabular-nums;overflow-wrap:anywhere;
+  }
+  .figure .val.small{font-size:clamp(20px,2.2vw,28px);font-weight:400;line-height:1.25}
+  .figure .val.sans{font-family:"Instrument Sans",sans-serif;font-weight:400;font-size:clamp(18px,1.6vw,21px);line-height:1.4}
+  .figure.wide{grid-column:1 / -1}
+  .tbd{
+    color:var(--accent);border-bottom:2px dashed var(--accent);padding-bottom:2px;
+  }
+  @media (max-width:800px){.figures{grid-template-columns:1fr}}
+
+  /* invoicing + documents on tint */
+  .tinted{background:var(--tint)}
+  .twoup{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:clamp(32px,5vw,80px);margin-top:clamp(28px,4vw,48px)}
+  .twoup h3{
+    font-family:"Fraunces",Georgia,serif;font-variation-settings:"opsz" 36,"SOFT" 40;
+    font-weight:500;font-size:22px;margin:0 0 14px;
+  }
+  .twoup p{margin:0 0 18px;color:var(--muted);max-width:50ch}
+  .kv{list-style:none;margin:0;padding:0}
+  .kv li{
+    display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap;
+    padding:12px 0;border-top:1px solid var(--rule);
+  }
+  .kv li:last-child{border-bottom:1px solid var(--rule)}
+  .kv .k{color:var(--muted);font-size:15px}
+  .kv .v{font-family:"DM Mono",ui-monospace,monospace;font-size:14.5px;font-variant-numeric:tabular-nums}
+  .kv .v.plain{font-family:inherit;font-size:16px}
+  .state{font-family:"DM Mono",ui-monospace,monospace;font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--faint)}
+  @media (max-width:800px){.twoup{grid-template-columns:1fr;gap:40px}}
+
+  /* footer back on indigo */
+  footer.field{padding:clamp(28px,4vw,40px) 0}
+  footer .inner{
+    display:flex;flex-wrap:wrap;justify-content:space-between;gap:10px 24px;
+    color:var(--on-field-soft);font-family:"DM Mono",ui-monospace,monospace;font-size:12px;letter-spacing:.06em;
+  }
+  footer .inner b{color:var(--on-field);font-weight:500}
+
+  /* language */
+  .en{display:none}
+  [data-lang="en"] .nl{display:none}
+  [data-lang="en"] .en{display:inline}
+  [data-lang="en"] .en.blk{display:block}
+
+  @media (prefers-reduced-motion:reduce){*{transition:none!important;animation:none!important}}
+</style>
+
+<header class="field">
+  <div class="wrap">
+    <div class="topbar">
+      <span class="eyebrow tag"><span class="nl">Ontwerpvoorstel B · concept</span><span class="en">Design proposal B · draft</span></span>
+      <div class="lang" role="group" aria-label="Taal / Language">
+        <button type="button" data-set="nl" aria-pressed="true">NL</button>
+        <button type="button" data-set="en" aria-pressed="false">EN</button>
+      </div>
+    </div>
+    <div class="hero">
+      <div class="mark">
+        <img src="assets/logo-indigo.png" alt="4nine64 bv" width="268" height="138">
+      </div>
+      <div>
+        <span class="eyebrow"><span class="nl">De vennootschap van Toine Schijvenaars</span><span class="en">The company of Toine Schijvenaars</span></span>
+        <h1>
+          <span class="nl">Begrippen, modellen en software voor organisaties die hun <em>informatie</em> op orde willen.</span>
+          <span class="en">Terms, models and software for organisations that want their <em>information</em> in order.</span>
+        </h1>
+        <p>
+          <span class="nl">4nine64 bv is de besloten vennootschap van waaruit ik als zelfstandig adviseur en ontwikkelaar werk, vooral voor de publieke sector. Hieronder staan de gegevens die u nodig heeft om met de vennootschap zaken te doen.</span>
+          <span class="en">4nine64 bv is the private limited company through which I work as an independent consultant and developer, mainly for the Dutch public sector. Below are the details you need to do business with the company.</span>
+        </p>
+      </div>
+    </div>
+  </div>
+</header>
+
+<section class="band">
+  <div class="wrap">
+    <div class="band-head">
+      <span class="eyebrow"><span class="nl">Werkterrein</span><span class="en">Practice</span></span>
+      <h2><span class="nl">Drie dingen die hier samenkomen</span><span class="en">Three things that come together here</span></h2>
+    </div>
+    <div class="cols">
+      <article>
+        <h3><span class="nl">Begrippenkaders</span><span class="en">Terminology frameworks</span></h3>
+        <p><span class="nl">Opzetten, harmoniseren en beheren van begrippenkaders en semantische standaarden voor overheidsorganisaties en koepels.</span><span class="en">Setting up, harmonising and maintaining terminology frameworks and semantic standards for government bodies and sector associations.</span></p>
+      </article>
+      <article>
+        <h3><span class="nl">Software voor informatiebeheer</span><span class="en">Information-management software</span></h3>
+        <p><span class="nl">Ontwerp en bouw van webapplicaties waarmee organisaties hun eigen begrippen, dossiers en gegevens beheren.</span><span class="en">Design and build of web applications that let organisations manage their own terms, records and data.</span></p>
+      </article>
+      <article>
+        <h3><span class="nl">Advies en interim</span><span class="en">Consulting and interim</span></h3>
+        <p><span class="nl">Begeleiding bij informatievoorziening, architectuur en de inrichting van beheerprocessen.</span><span class="en">Guidance on information provision, architecture and the setup of governance processes.</span></p>
+      </article>
+    </div>
+  </div>
+</section>
+
+<section class="band">
+  <div class="wrap">
+    <div class="band-head">
+      <span class="eyebrow"><span class="nl">Zakelijke gegevens</span><span class="en">Company details</span></span>
+      <h2><span class="nl">Het getal achter de naam</span><span class="en">The numbers behind the name</span></h2>
+    </div>
+    <div class="figures">
+      <div class="figure">
+        <span class="eyebrow"><span class="nl">KvK-nummer</span><span class="en">Chamber of Commerce no.</span></span>
+        <span class="val">30243619</span>
+      </div>
+      <div class="figure">
+        <span class="eyebrow"><span class="nl">Btw-identificatienummer</span><span class="en">VAT identification no.</span></span>
+        <span class="val small">NL8196.95.063.B01</span>
+      </div>
+      <div class="figure">
+        <span class="eyebrow"><span class="nl">Rechtsvorm</span><span class="en">Legal form</span></span>
+        <span class="val sans"><span class="nl">Besloten vennootschap met beperkte aansprakelijkheid</span><span class="en">Besloten vennootschap (Dutch private limited company)</span></span>
+      </div>
+      <div class="figure">
+        <span class="eyebrow"><span class="nl">Bestuurder</span><span class="en">Director</span></span>
+        <span class="val sans">T. Schijvenaars</span>
+      </div>
+      <div class="figure">
+        <span class="eyebrow"><span class="nl">Vestigingsadres</span><span class="en">Registered address</span></span>
+        <span class="val sans"><span class="tbd"><span class="nl">straat, postcode, plaats</span><span class="en">street, postcode, town</span></span></span>
+      </div>
+      <div class="figure">
+        <span class="eyebrow">E-mail</span>
+        <span class="val sans"><span class="tbd">naam@4nine64.nl</span></span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="band tinted">
+  <div class="wrap">
+    <div class="band-head">
+      <span class="eyebrow"><span class="nl">Praktisch</span><span class="en">Practical</span></span>
+      <h2><span class="nl">Facturen, betaling en documenten</span><span class="en">Invoices, payment and documents</span></h2>
+    </div>
+    <div class="twoup">
+      <div>
+        <h3><span class="nl">Facturen en betaling</span><span class="en">Invoices and payment</span></h3>
+        <p><span class="nl">Facturen worden digitaal verstuurd en zijn betaalbaar binnen dertig dagen na factuurdatum. Vermeld bij betaling het factuurnummer en, waar van toepassing, uw inkoopordernummer.</span><span class="en">Invoices are sent digitally and are payable within thirty days of the invoice date. When paying, quote the invoice number and, where applicable, your purchase order number.</span></p>
+        <ul class="kv">
+          <li><span class="k">IBAN</span><span class="v">NL34 INGB 0005 3309 16</span></li>
+          <li><span class="k"><span class="nl">Ten name van</span><span class="en">Account holder</span></span><span class="v plain">4nine64 bv</span></li>
+          <li><span class="k"><span class="nl">Facturen richten aan</span><span class="en">Send invoices to</span></span><span class="v"><span class="tbd">facturen@4nine64.nl</span></span></li>
+          <li><span class="k"><span class="nl">Betaaltermijn</span><span class="en">Payment term</span></span><span class="v"><span class="nl">30 dagen</span><span class="en">30 days</span></span></li>
+        </ul>
+      </div>
+      <div>
+        <h3><span class="nl">Voorwaarden en verklaringen</span><span class="en">Terms and statements</span></h3>
+        <p><span class="nl">De documenten die bij het zakendoen met de vennootschap horen.</span><span class="en">The documents that come with doing business with the company.</span></p>
+        <ul class="kv">
+          <li><span class="k"><span class="nl">Algemene voorwaarden</span><span class="en">General terms and conditions</span></span><span class="state"><span class="nl">nog op te stellen</span><span class="en">to be drafted</span></span></li>
+          <li><span class="k"><span class="nl">Privacyverklaring</span><span class="en">Privacy statement</span></span><span class="state"><span class="nl">nog op te stellen</span><span class="en">to be drafted</span></span></li>
+          <li><span class="k"><span class="nl">Uittreksel Handelsregister</span><span class="en">Commercial register extract</span></span><span class="state"><span class="nl">op aanvraag</span><span class="en">on request</span></span></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer class="field">
+  <div class="wrap">
+    <div class="inner">
+      <span><b>4nine64 bv</b> &nbsp;·&nbsp; KvK 30243619 &nbsp;·&nbsp; 4nine64.nl</span>
+      <span>&copy; 2026 &nbsp;·&nbsp; <span class="nl">Laatst bijgewerkt</span><span class="en">Last updated</span> 05-10-2026</span>
+    </div>
+  </div>
+</footer>
+
+<script>
+  (function () {
+    var root = document.documentElement;
+    var buttons = Array.prototype.slice.call(document.querySelectorAll('.lang button'));
+    function apply(lang) {
+      root.setAttribute('data-lang', lang);
+      root.lang = lang;
+      buttons.forEach(function (b) { b.setAttribute('aria-pressed', String(b.dataset.set === lang)); });
+      try { localStorage.setItem('4nine64-lang', lang); } catch (e) {}
+    }
+    var stored = null;
+    try { stored = localStorage.getItem('4nine64-lang'); } catch (e) {}
+    apply(stored === 'en' ? 'en' : 'nl');
+    buttons.forEach(function (b) { b.addEventListener('click', function () { apply(b.dataset.set); }); });
+  })();
+</script>
